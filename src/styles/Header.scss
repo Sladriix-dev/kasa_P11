@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 70px;
+    padding: 20px 70px; // Default padding for large screens
     background-color: #fff;
   
     .logo img {
@@ -29,6 +29,31 @@
     .nav-link.active {
       text-decoration: underline;
       font-weight: bold;
+    }
+  
+    // Responsiveness for smaller screens
+    @media (max-width: 768px) {
+      padding: 15px 30px; // Reduce padding for tablets
+  
+      .nav {
+        gap: 20px; // Reduce gap between nav links on smaller screens
+      }
+  
+      .nav-link {
+        font-size: 1rem; // Adjust font size for nav links
+      }
+    }
+  
+    @media (max-width: 576px) {
+      padding: 10px 20px; // Further reduce padding for mobile
+  
+      .nav {
+        gap: 15px;
+      }
+  
+      .nav-link {
+        font-size: 0.9rem; // Smaller font size for nav links on mobile
+      }
     }
   }
   
