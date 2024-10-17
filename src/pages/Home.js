@@ -8,19 +8,21 @@ function Home() {
   const [properties, setProperties] = useState([]);
 
   useEffect(() => {
-    setProperties(data); // Charge les propriétés depuis le fichier JSON
+    setProperties(data);
   }, []);
 
   return (
     <div className="home">
       <Banner 
-        image="/images/banner-image.jpg" 
+        image="images/banner-image.jpg" 
         text="Chez vous, partout et ailleurs" 
       />
-      <div className="cards-grid">
-        {properties.map((property) => (
-          <Card key={property.id} title={property.title} image={property.cover} />
-        ))}
+      <div className="cards-wrapper">
+        <div className="cards-grid">
+          {properties.map((property) => (
+            <Card key={property.id} title={property.title} image={property.cover} />
+          ))}
+        </div>
       </div>
     </div>
   );
