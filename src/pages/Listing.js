@@ -1,60 +1,45 @@
-import { useState } from 'react';
+import { useParams, Navigate } from 'react-router-dom';
 import Dropdown from '../components/Dropdown';
-import { useParams } from 'react-router-dom';
+import Carousel from '../components/Carrousel';
 import data from '../data/logements.json';
 import '../styles/Listing.scss';
 
 function Listing() {
   const { id } = useParams();
   const listing = data.find((item) => item.id === id);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-  const handlePrevClick = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? listing.pictures.length - 1 : prevIndex - 1
-    );
-  };
-
-  const handleNextClick = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === listing.pictures.length - 1 ? 0 : prevIndex + 1
-    );
-  };
+  if (!listing) {
+    return <Navigate to="/404" />;
+  }
 
   return (
     <div className="listing-container">
-      {/* Carrousel d'images */}
-      <div className="carousel">
-        <button className="carousel-nav left" onClick={handlePrevClick}>‹</button>
-        <img
-          src={listing.pictures[currentImageIndex]}
-          alt={listing.title}
-          className="carousel-image"
-        />
-        <button className="carousel-nav right" onClick={handleNextClick}>›</button>
-      </div>
+      {/* Utilisation du composant Carousel */}
+      <Carousel pictures={listing.pictures} />
 
       <div className="listing-details">
-        <div className="listing-info">
-          <h1>{listing.title}</h1>
-          <p>{listing.location}</p>
+        <div className="listing-info-wrapper">
+          <div className="listing-info">
+            <h1>{listing.title}</h1>
+            <p>{listing.location}</p>
+          </div>
+          <div className="tags">
+            {listing.tags.map((tag, index) => (
+              <span key={index} className="tag">{tag}</span>
+            ))}
+          </div>
         </div>
-        <div className="host-info">
-          <p>{listing.host.name}</p>
-          <img src={listing.host.picture} alt={listing.host.name} className="host-picture" />
-        </div>
-      </div>
 
-      <div className="tags-rating">
-        <div className="tags">
-          {listing.tags.map((tag, index) => (
-            <span key={index} className="tag">{tag}</span>
-          ))}
-        </div>
-        <div className="rating">
-          {Array.from({ length: 5 }, (_, i) => (
-            <span key={i} className={i < listing.rating ? 'star filled' : 'star'}>&#9733;</span>
-          ))}
+        <div className="host-rating-wrapper">
+          <div className="host-info">
+            <p>{listing.host.name}</p>
+            <img src={listing.host.picture} alt={listing.host.name} className="host-picture" />
+          </div>
+          <div className="rating">
+            {Array.from({ length: 5 }, (_, i) => (
+              <span key={i} className={i < listing.rating ? 'star filled' : 'star'}>&#9733;</span>
+            ))}
+          </div>
         </div>
       </div>
 

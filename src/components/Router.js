@@ -14,6 +14,7 @@ function AppRouter() {
           <Route path="/about" element={<About />} />
           <Route path="/listing/:id" element={<Listing />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/404" element={<NotFound />} />
         </Routes>
       </Layout>
     </Router>

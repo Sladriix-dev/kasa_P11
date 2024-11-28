@@ -1,0 +1,24 @@
+.about-container {
+    width: 85%;
+    margin: 0 auto;
+    padding: 20px;
+  
+    .banner {
+      height: 200px;  // Réduction de la hauteur de la bannière
+      margin-bottom: 30px;
+  
+      &::before {
+        border-radius: 10px; // Maintien de l'effet arrondi
+        background-color: transparent;
+      }
+    }
+  
+    .dropdowns-section {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      max-width: 800px; // Limitation de la largeur des dropdowns
+      margin: 0 auto;   // Centrage des dropdowns par rapport à la bannière
+    }
+  }
+  

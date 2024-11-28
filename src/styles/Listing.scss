@@ -54,75 +54,91 @@
   }
 }
 
-
-/* Listing details (title, location, host info) */
+/* Listing details (title, location, host info, tags, and rating) */
 .listing-details {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch; /* Change to stretch to align vertically based on parent */
   margin-bottom: 20px;
+  flex-wrap: wrap;
 
-  .listing-info {
-    h1 {
-      color: #ff5a5f; /* Adjust the h1 color */
+  .listing-info-wrapper {
+    flex: 2; /* Prend plus d'espace pour mieux utiliser la largeur */
+    min-width: 300px;
+
+    .listing-info {
+      h1 {
+        color: #ff5a5f; /* Ajuste la couleur du titre */
+        font-size: 2.5rem; /* Ajuste la taille du titre */
+      }
+
+      p {
+        margin-top: 10px;
+        color: #000;
+        font-size: 1rem;
+      }
+    }
+
+    .tags {
+      margin-top: 15px;
+      display: flex;
+      flex-wrap: wrap;
+
+      .tag {
+        background-color: #ff5a5f;
+        color: white;
+        padding: 5px 10px;
+        border-radius: 5px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+      }
     }
   }
 
-  .host-info {
+  .host-rating-wrapper {
+    flex: 1; /* Réduit l'espace pour éviter que la section droite prenne trop de largeur */
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-end; /* Aligne le contenu à droite */
+    justify-content: center; /* Aligne le contenu verticalement au centre de son parent */
 
-    .host-picture {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-left: 10px;
+    .host-info {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+
+      p {
+        margin-right: 10px;
+        color: #000;
+      }
+
+      .host-picture {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
     }
-  }
-}
 
-/* Tags and rating section */
-.tags-rating {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+    .rating {
+      display: flex;
+      justify-content: flex-end; /* Aligne les étoiles à droite */
+      .star {
+        font-size: 2rem;
+        color: #ccc;
 
-  .tags,
-  .dropdown {
-    flex: 1; /* Ensures dropdown aligns with tags */
-  }
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-
-    .tag {
-      background-color: #ff5a5f;
-      color: white;
-      padding: 5px 10px;
-      border-radius: 5px;
-      margin-right: 5px;
-      margin-bottom: 5px;
-    }
-  }
-
-  .rating {
-    .star {
-      font-size: 2rem;
-      color: #ccc;
-
-      &.filled {
-        color: #ff5a5f;
+        &.filled {
+          color: #ff5a5f;
+        }
       }
     }
   }
 }
 
+/* Dropdowns container */
 .dropdowns-container {
   display: flex;
   justify-content: space-between;
-  gap: 60px; /* Espace entre les deux dropdowns */
+  gap: 30px;
   margin-top: 20px;
 }
 
@@ -135,8 +151,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #ff5a5f; /* Red background like the tags */
-    color: white; /* White text */
+    background-color: #ff5a5f; /* Fond rouge comme les tags */
+    color: white; /* Texte blanc */
     padding: 10px;
     height: 25px;
     border-radius: 5px;
@@ -148,16 +164,16 @@
   }
 
   .dropdown-content {
-    background-color: #f7f7f7; /* Optional light background for content */
+    background-color: #f7f7f7; /* Fond clair optionnel pour le contenu */
     padding: 10px;
     border-radius: 0 0 5px 5px;
   }
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 720px) {
   .listing-container {
-    width: 100%;
+    width: 95%;
     padding: 10px;
   }
 
@@ -167,20 +183,39 @@
 
   .listing-details {
     flex-direction: column;
-    text-align: center;
-  }
+    align-items: flex-start; /* Alignement à gauche en version mobile */
+    text-align: left;
 
-  .host-info {
-    justify-content: center;
-    margin-top: 10px;
+    .listing-info-wrapper {
+      width: 100%; /* Prend toute la largeur pour bien s'aligner à gauche */
+      margin-bottom: 20px;
+
+      .tags {
+        justify-content: flex-start; /* Alignement des tags à gauche */
+      }
+    }
+
+    .host-rating-wrapper {
+      flex-direction: row;
+      justify-content: space-between;
+      width: 100%;
+      align-items: center;
+      margin-top: 10px;
+
+      .host-info {
+        justify-content: flex-start;
+        margin-left: 0;
+      }
+
+      .rating {
+        justify-content: flex-end;
+        margin-right: 0;
+      }
+    }
   }
 
   .tags-rating {
     flex-direction: column;
-  }
-
-  .dropdown-header {
-    justify-content: space-between;
   }
 
   .dropdowns-container {
@@ -188,6 +223,6 @@
   }
 
   .dropdown {
-    max-width: 100%;  
+    max-width: 100%;
   }
 }

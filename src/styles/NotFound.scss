@@ -1,0 +1,27 @@
+.notfound-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 69vh;
+    text-align: center;
+    color: #FF6060;
+}
+
+.notfound-code {
+    font-size: 10rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.notfound-message {
+    font-size: 1.5rem;
+    margin-top: 10px;
+}
+
+.notfound-link {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #000;
+    text-decoration: underline;
+}
